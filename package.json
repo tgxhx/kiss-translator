@@ -25,7 +25,7 @@
   "scripts": {
     "start": "REACT_APP_CLIENT=web react-app-rewired start",
     "start:userscript": "REACT_APP_CLIENT=userscript react-app-rewired start",
-    "build:chrome": "rm -rf build/chrome && BUILD_PATH=./build/chrome REACT_APP_CLIENT=chrome react-app-rewired build && rm build/chrome/content.html",
+    "build:chrome": "rm -rf build/chrome && cross-env BUILD_PATH=./build/chrome REACT_APP_CLIENT=chrome react-app-rewired build && rm build/chrome/content.html",
     "build:safari-output": "rm -rf build/safari && BUILD_PATH=./build/safari REACT_APP_CLIENT=safari react-app-rewired build && rm build/safari/content.html",
     "build:safari": "node src/scripts/build-safari.js",
     "build:edge": "rm -rf build/edge && cp -r build/chrome build/edge",
@@ -73,6 +73,7 @@
     "@babel/node": "^7.22.19",
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@babel/preset-env": "^7.22.20",
+    "cross-env": "^10.1.0",
     "dotenv": "^17.2.1",
     "find-up": "^7.0.0",
     "prettier": "3.6.2",
