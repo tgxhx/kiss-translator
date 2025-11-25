@@ -3,7 +3,7 @@ import { storage } from "../libs/storage";
 import { kissLog } from "../libs/log";
 import { syncData } from "../libs/sync";
 import { useDebouncedCallback } from "./DebouncedCallback";
-import { isOptions } from "../libs/browser";
+import { isOptions, isBg } from "../libs/browser";
 
 /**
  * 用于将组件状态与 Storage 同步
@@ -79,8 +79,8 @@ export function useStorage(key, defaultVal = null, syncKey = "") {
       kissLog(`storage save error for key: ${key}`, err);
     });
 
-    // 触发远端同步
-    if (syncKey && isOptions()) {
+    // 触发远端同步 - 只在background环境中执行，避免CORS问题
+    if (syncKey && isBg()) {
       debouncedSync(syncKey, data);
     }
   }, [key, syncKey, isLoading, data, debouncedSync]);
